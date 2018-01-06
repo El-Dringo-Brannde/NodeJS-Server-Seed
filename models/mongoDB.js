@@ -1,58 +1,60 @@
 let crud = require('./crud');
-
+var self;
 
 // class for more complex mongoDB queries that rely on CRUD operations
 module.exports = class mongoDB extends crud {
    constructor(mongo, collection) {
       super(mongo, collection)
+
+      self = this;
    }
 
    async aggregate(aggregation) {
-      return await this.db.aggregate(aggregation);
+      return await self.db.aggregate(aggregation);
    }
 
    async create(inserting) {
       if (Array.isArray(inserting))
-         return await this.createMany(inserting)
+         return await self.createMany(inserting)
       else
-         return await this.createOne(inserting)
+         return await self.createOne(inserting)
    }
 
    async getById(id) {
       let searchObj = {
-         _id: this.id(id)
+         _id: self.id(id)
       }
-      return await this.read(searchObj)
+      return await self.read(searchObj)
    }
 
    async getAll() {
-      return await this.read({});
+      return await self.read({});
    }
 
    async count(searchObj) {
-      let retVal = await this.read(searchObj);
+      let retVal = await self.read(searchObj);
       return retVal.length
    }
 
    async removeById(id) {
       let searchObj = {
-         _id: this.id(id)
+         _id: self.id(id)
       }
-      return await this.delete(searchObj);
+      return await self.delete(searchObj);
    }
 
    async update(searchObj, updateVal, multi = false) {
       if (multi)
-         return await this.updateMany(searchObj, updateVal);
+         return await self.updateMany(searchObj, updateVal);
       else
-         return await this.updateOne(searchObj, updateVal);
+         return await self.updateOne(searchObj, updateVal);
    }
 
    async remove(searchObj, multi = false) {
       if (multi)
-         return await this.deleteMany(searchObj);
+         return await self.deleteMany(searchObj);
       else
-         return await this.deleteOne(searchObj);
+         return await self.deleteOne(searchObj);
    }
 
 }

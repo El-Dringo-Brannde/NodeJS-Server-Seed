@@ -13,8 +13,12 @@ module.exports = class crud {
 
    onInit() { } // virtual func for anything after constructor
 
-   async create(insertObj) {
-      return await self.db.insertMany(insertObj, { upsert: true });
+   async createOne(insertObj) {
+      return await self.db.insertOne(insertObj);
+   }
+
+   async createMany(insertObjects) {
+      return await self.db.insertMany(insertObjects);
    }
 
    async read(searchObj) {

@@ -1,9 +1,9 @@
-var url = require('./../config/url');
+var config = require('./../config/constants');
 
-module.exports = async mongo => {
+module.exports = mongo => {
    return new Promise((res, rej) => {
-      mongo.connect(url, (err, database) => {
-         res(database.db('LunchBox'));
+      mongo.connect(config.mongoURL, (err, database) => {
+         res(database.db(config.databaseName));
       });
    });
 };

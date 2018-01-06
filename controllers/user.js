@@ -1,7 +1,7 @@
-const crud = require('./../models/crud');
+const mongoDB = require('./../models/mongoDB');
 var self = null;
 
-module.exports = class user extends crud {
+module.exports = class user extends mongoDB {
    constructor(mongo, collName) {
       super(mongo, collName);
       self = this; // important to escape scope when linking route to controller
@@ -10,7 +10,7 @@ module.exports = class user extends crud {
    async login(payload) {
       payload.email = payload.email.toLowerCase();
       payload.password = payload.password.toLowerCase();
-      let retVal = await this.read(payload);
+      let retVal = await self.read(payload);
       return retVal;
    }
 
@@ -18,10 +18,10 @@ module.exports = class user extends crud {
       return await self.read(req.query)
    }
 
-   async signUp(payload) {
-      payload.email = payload.email.toLowerCase();
-      payload.password = payload.password.toLowerCase();
-      let retVal = await this.create(payload);
-      return retVal;
+   async signUp(req) {
+      let payload = req.payload
+      payload.email = payload.email.toLowerCase().trim();
+      payload.password = payload.password.toLowerCase().trim();
+      return await self.create(payload);
    }
 }

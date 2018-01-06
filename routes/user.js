@@ -1,5 +1,5 @@
-var userController = require('./../controllers/user')
-
+let userController = require('./../controllers/user')
+let userSchema = require('./../schemas/user');
 
 // all routes are prefixed with '/user'
 module.exports = mongo => {
@@ -18,8 +18,11 @@ module.exports = mongo => {
             {
                method: 'POST',
                path: '/signup',
-               handler: async req => {
-                  return await userController.signup(req.payload)
+               handler: userController.signUp,
+               options: {
+                  validate: {
+                     payload: userSchema.both
+                  }
                }
             },
             {

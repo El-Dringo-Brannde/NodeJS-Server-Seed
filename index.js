@@ -2,6 +2,7 @@ const hapi = require('hapi');
 var mongo = require('mongodb').MongoClient;
 var initMongo = require('./database/init')(mongo); // init server
 var events = require('./utilities/events');
+var serverPort = require('./config/constants').defaultPort;
 
 
 class server {
@@ -9,7 +10,7 @@ class server {
       this.ready = null;
       this.plugins = null;
       this.server = new hapi.Server({
-         port: 3009,
+         port: serverPort,
          routes: {
             cors: {
                origin: ['*'],

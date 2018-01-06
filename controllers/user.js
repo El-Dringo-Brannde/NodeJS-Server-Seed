@@ -7,7 +7,8 @@ module.exports = class user extends mongoDB {
       self = this; // important to escape scope when linking route to controller
    }
 
-   async login(payload) {
+   async login(req) {
+      let payload = req.payload;
       payload.email = payload.email.toLowerCase();
       payload.password = payload.password.toLowerCase();
       let retVal = await self.read(payload);
@@ -17,6 +18,7 @@ module.exports = class user extends mongoDB {
    async getUser(req) {
       return await self.read(req.query)
    }
+
 
    async signUp(req) {
       let payload = req.payload

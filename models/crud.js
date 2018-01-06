@@ -25,12 +25,20 @@ module.exports = class crud {
       return await self.db.find(searchObj).toArray();
    }
 
-   async update(searchObj, updateVal) {
-      return await self.db.findOneAndUpdate(searchObj, { $set: updateVal });
+   async updateOne(searchObj, updateVal) {
+      return await self.db.updateOne(searchObj, { $set: updateVal });
    }
 
-   async delete(searchObj) {
-      return await self.db.findOneAndDelete(searchObj);
+   async updateMany(searchObj, updateVal) {
+      return await self.db.updateMany(searchObj, { $set: updateVal });
+   }
+
+   async deleteOne(searchObj) {
+      return await self.db.deleteOne(searchObj);
+   }
+
+   async deleteMany(searchObj) {
+      return await self.db.deleteMany(searchObj);
    }
 }
 

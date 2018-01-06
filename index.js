@@ -1,6 +1,7 @@
 const hapi = require('hapi');
 var mongo = require('mongodb').MongoClient;
 var initMongo = require('./database/init')(mongo); // init server
+var events = require('./utilities/events');
 
 
 class server {
@@ -29,7 +30,8 @@ class server {
    async start() {
       await this.server.start()
       console.log('Server running at: ' + this.server.info.uri);
+      events.emit('ready', this.server)
    }
 }
 
-module.exports = new server();
+module.exports = new server()

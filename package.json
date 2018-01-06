@@ -1,38 +1,38 @@
 {
-  "name": "nodejs-server-seed",
-  "version": "1.0.0",
-  "description": "A seed project that covers all the boiler plate for creating a nodeJS server in ES7",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/El-Dringo-Brannde/NodeJS-Server-Seed.git"
-  },
-  "keywords": [
-    "NodeJS",
-    "ES7",
-    "Server",
-    "Database",
-    "MongoDB"
-  ],
-  "author": "Brandon Dring",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/El-Dringo-Brannde/NodeJS-Server-Seed/issues"
-  },
-  "homepage": "https://github.com/El-Dringo-Brannde/NodeJS-Server-Seed#readme",
-  "dependencies": {
-    "boom": "^7.1.1",
-    "chai": "^4.1.2",
-    "hapi": "^17.2.0",
-    "joi": "^13.1.0",
-    "mocha": "^4.1.0",
-    "mongodb": "^3.0.1",
-    "portfinder": "^1.0.13"
-  }
+   "name": "nodejs-server-seed",
+   "version": "1.0.0",
+   "description": "A seed project that covers all the boiler plate for creating a nodeJS server in ES7",
+   "main": "index.js",
+   "directories": {
+      "test": "test"
+   },
+   "scripts": {
+      "test": "mocha test/*.js"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/El-Dringo-Brannde/NodeJS-Server-Seed.git"
+   },
+   "keywords": [
+      "NodeJS",
+      "ES7",
+      "Server",
+      "Database",
+      "MongoDB"
+   ],
+   "author": "Brandon Dring",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/El-Dringo-Brannde/NodeJS-Server-Seed/issues"
+   },
+   "homepage": "https://github.com/El-Dringo-Brannde/NodeJS-Server-Seed#readme",
+   "dependencies": {
+      "boom": "^7.1.1",
+      "chai": "^4.1.2",
+      "hapi": "^17.2.0",
+      "joi": "^13.1.0",
+      "mocha": "^4.1.0",
+      "mongodb": "^3.0.1",
+      "portfinder": "^1.0.13"
+   }
 }

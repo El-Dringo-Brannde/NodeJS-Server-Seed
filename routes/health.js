@@ -6,7 +6,7 @@ module.exports = () => {
             method: 'GET',
             path: '/status',
             handler: req => {
-               return ({ "status": "UP" });
+               return ({ status: "UP" });
             }
          }
          ])

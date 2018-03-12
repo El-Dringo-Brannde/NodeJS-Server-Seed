@@ -23,9 +23,7 @@ class server {
 
    async initialize() {
       this.ready = await initMongo;
-      this.plugins = require('./components/health/route')(this.ready);
-      await this.server.register(this.plugins);
-      this.plugins = require('./components/user/route')(this.ready);
+      this.plugins = require('./server/plugins')(this.ready);
       await this.server.register(this.plugins);
       this.start();
    }

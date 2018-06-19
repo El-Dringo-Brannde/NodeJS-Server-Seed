@@ -1,13 +1,13 @@
 module.exports = mongo => {
    return [
       {
-         plugin: require('./../routes/health')(),
+         plugin: require('./../components/health/route')(),
          routes: {
             prefix: '/health'
          }
       },
       {
-         plugin: require('./../routes/user')(mongo),
+         plugin: require('./../components/user/route')(mongo),
          routes: {
             prefix: '/user'
          }

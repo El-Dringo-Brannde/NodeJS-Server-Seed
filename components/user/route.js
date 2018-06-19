@@ -1,5 +1,5 @@
-let userController = require('./../controllers/user')
-let userSchema = require('./../schemas/user');
+let userController = require('./logic')
+let userSchema = require('./schema');
 
 // all routes are prefixed with '/user'
 module.exports = mongo => {

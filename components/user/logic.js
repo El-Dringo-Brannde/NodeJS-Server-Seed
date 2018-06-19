@@ -1,4 +1,4 @@
-const mongoDB = require('./../models/mongoDB');
+const mongoDB = require('./../../models/mongoDB');
 var self = null;
 
 module.exports = class user extends mongoDB {

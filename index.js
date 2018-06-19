@@ -1,38 +1,13 @@
-const hapi = require('hapi');
-var mongo = require('mongodb').MongoClient;
-var initMongo = require('./database/init')(mongo); // init server
-var events = require('./utilities/events');
-var serverPort = require('./config/constants').defaultPort;
+const cluster = require('cluster')
+const numCPU = require('os').cpus().length
+let Server = require('./server')
 
-
-class server {
-   constructor() {
-      this.ready = null;
-      this.plugins = null;
-      this.server = new hapi.Server({
-         port: serverPort,
-         routes: {
-            cors: {
-               origin: ['*'],
-               additionalHeaders: ['Access-Control-Allow-Origin', 'origin', 'accept-encoding']
-            }
-         }
-      });
-      this.initialize();
+if (process.env.NODE_ENV === 'production' && cluster.isMaster) {
+   for (var i = 0; i < numCPU; i++) {
+      cluster.fork()
    }
-
-   async initialize() {
-      this.ready = await initMongo;
-      this.plugins = require('./server/plugins')(this.ready);
-      await this.server.register(this.plugins);
-      this.start();
-   }
-
-   async start() {
-      await this.server.start()
-      console.log('Server running at: ' + this.server.info.uri);
-      events.emit('ready', this.server)
-   }
+   cluster.on('online', (worker) => console.log('Worker ' + worker.process.pid + ' is online.'))
+   cluster.on('exit', (worker, code, signal) => console.log('worker ' + worker.process.pid + ' died.'))
+} else {
+   new Server() // start
 }
-
-module.exports = new server()

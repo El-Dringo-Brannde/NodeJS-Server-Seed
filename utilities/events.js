@@ -1,4 +1,5 @@
-var events = require('events');
+let events = require('events');
+
 events = new events.EventEmitter();
 
-module.exports = events; 
+module.exports = events;

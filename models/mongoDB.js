@@ -1,60 +1,51 @@
-let crud = require('./crud');
-var self;
+const crud = require('./crud');
+const { MongoID } = require('mongodb');
 
 // class for more complex mongoDB queries that rely on CRUD operations
 module.exports = class mongoDB extends crud {
-   constructor(mongo, collection) {
-      super(mongo, collection)
-
-      self = this;
+   constructor(collName) {
+      super(collName);
+      this.mongoID = MongoID;
    }
-
    async aggregate(aggregation) {
-      return await self.db.aggregate(aggregation);
+      return this.db.aggregate(aggregation);
    }
 
    async create(inserting) {
-      if (Array.isArray(inserting))
-         return await self.createMany(inserting)
-      else
-         return await self.createOne(inserting)
+      if (Array.isArray(inserting)) { return this.createMany(inserting); }
+      return this.createOne(inserting);
    }
 
-   async getById(id) {
-      let searchObj = {
-         _id: self.id(id)
-      }
-      return await self.read(searchObj)
+   async readById(id) {
+      const selector = {
+         _id: this.mongoID(id),
+      };
+      return this.read(selector);
    }
 
-   async getAll() {
-      return await self.read({});
+   async readAll() {
+      return this.read({});
    }
 
    async count(searchObj) {
-      let retVal = await self.read(searchObj);
-      return retVal.length
+      const retVal = this.read(searchObj);
+      return retVal.length;
    }
 
    async removeById(id) {
-      let searchObj = {
-         _id: self.id(id)
-      }
-      return await self.delete(searchObj);
+      const searchObj = {
+         _id: this.id(id),
+      };
+      return this.delete(searchObj);
    }
 
    async update(searchObj, updateVal, multi = false) {
-      if (multi)
-         return await self.updateMany(searchObj, updateVal);
-      else
-         return await self.updateOne(searchObj, updateVal);
+      if (multi) { return this.updateMany(searchObj, updateVal); }
+      return this.updateOne(searchObj, updateVal);
    }
 
    async remove(searchObj, multi = false) {
-      if (multi)
-         return await self.deleteMany(searchObj);
-      else
-         return await self.deleteOne(searchObj);
+      if (multi) { return this.deleteMany(searchObj); }
+      return this.deleteOne(searchObj);
    }
-
-}
+};

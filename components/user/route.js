@@ -1,40 +1,38 @@
-let userController = require('./logic')
-let userSchema = require('./schema');
+let UserController = require('./logic');
+const UserSchema = require('./schema');
 
 // all routes are prefixed with '/user'
-module.exports = mongo => {
-   userController = new userController(mongo, 'users')
+const collectionName = 'users';
+
+module.exports = () => {
+   UserController = new UserController(collectionName);
 
    return {
       name: 'user',
-      register: (server, options) => {
-
+      register: (server) => {
          server.route([
             {
                method: 'GET',
                path: '/',
-               handler: userController.getUser
+               handler: UserController.getUser,
             },
             {
                method: 'POST',
                path: '/signup',
-               handler: userController.signUp,
+               handler: UserController.signUp,
                options: {
                   validate: {
-                     payload: userSchema.both
-                  }
-               }
+                     payload: UserSchema.both,
+                  },
+               },
             },
             {
                method: 'POST',
                path: '/login',
-               handler: async req => {
-                  return await userController.login(req.payload);
-               }
-            }
-         ])
-
-      }
-   }
-}
+               handler: UserController.login,
+            },
+         ]);
+      },
+   };
+};
 

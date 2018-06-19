@@ -1,14 +1,16 @@
-let joi = require('joi')
+const joi = require('joi');
 
 module.exports = class baseSchema {
-   constructor() { }
+   constructor() {
+      this.joi = joi;
+   }
 
    array(type) {
-      return joi.array().items(type)
+      return this.joi.array().items(type);
    }
 
    twoSchemas(firstSchema, altSchema) {
-      return joi.alternatives().try(firstSchema, altSchema)
+      return this.joi.alternatives().try(firstSchema, altSchema);
    }
-}
+};
 

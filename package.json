@@ -40,7 +40,7 @@
       "joi": "^13.4.0",
       "jsonwebtoken": "^8.3.0",
       "mocha": "^4.1.0",
-      "mongodb": "^3.0.10"
+      "mongodb": "^3.1.13"
    },
    "devDependencies": {
       "eslint": "^4.19.1",

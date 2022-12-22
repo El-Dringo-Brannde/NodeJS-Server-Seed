@@ -38,7 +38,7 @@
       "express-rate-limit": "^2.11.0",
       "hapi": "^17.5.1",
       "joi": "^13.4.0",
-      "jsonwebtoken": "^8.3.0",
+      "jsonwebtoken": "^9.0.0",
       "mocha": "^4.1.0",
       "mongodb": "^3.0.10"
    },
